@@ -7,7 +7,7 @@
     android:background="#F5E9C8"
     android:padding="12dp">
 
-    <!-- الصورة على اليسار بوزن 0.3 -->
+
     <ImageView
         android:id="@+id/img_passeport_ta"
         android:layout_width="0dp"
@@ -18,7 +18,7 @@
         android:background="#D8C58F"
         android:contentDescription="Photo du passeport" />
 
-    <!-- النصوص على اليمين بوزن 0.7 -->
+
     <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
