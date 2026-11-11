@@ -18,17 +18,17 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        // 1) ربط العناصر
+        //liaison
         LinearLayout racine = findViewById(R.id.layout_racine_ta);
         TextView tvMessage = findViewById(R.id.tv_message_ta);
         Button btnNouveau = findViewById(R.id.btn_nouveau_ta);
 
-        // 2) استلام الحكم والاسم
+        // njib el esm wl 9arar
         Intent recu = getIntent();
         boolean approuve = recu.getBooleanExtra(Cles.verdict(Cles.MATRICULE), false);
         String nom = recu.getStringExtra(Cles.nomVoyageur(Cles.MATRICULE));
 
-        // 3) تغيير لون الخلفية والرسالة حسب الحكم
+        // loun el bg 7asb el 9arar
         if (approuve) {
             racine.setBackgroundColor(Color.parseColor("#2E7D32")); // أخضر
             tvMessage.setText("Bon voyage " + nom + " !");
@@ -37,7 +37,7 @@ public class ResultActivity extends AppCompatActivity {
             tvMessage.setText(nom + " est en état d'arrestation temporelle");
         }
 
-        // 4) زر مسافر جديد: الرجوع إلى MainActivity وإغلاق النشاطات السابقة
+        // rjou3 lil main
         btnNouveau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
