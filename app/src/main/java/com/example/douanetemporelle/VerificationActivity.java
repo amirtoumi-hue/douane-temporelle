@@ -14,7 +14,7 @@ public class VerificationActivity extends AppCompatActivity {
     private TextView tvNom, tvAge, tvMotif, tvAlerte;
     private Button btnApprouver, btnRefuser;
 
-    // 1) المتغيرات التي تحمل البيانات المستلمة
+
     private String nom, motif;
     private int naissance, destination;
 
@@ -23,7 +23,7 @@ public class VerificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification);
 
-        // 2) ربط العناصر
+        // liaison
         tvNom = findViewById(R.id.tv_nom_ta);
         tvAge = findViewById(R.id.tv_age_ta);
         tvMotif = findViewById(R.id.tv_motif_ta);
@@ -31,7 +31,7 @@ public class VerificationActivity extends AppCompatActivity {
         btnApprouver = findViewById(R.id.btn_approuver_ta);
         btnRefuser = findViewById(R.id.btn_refuser_ta);
 
-        // 3) استلام البيانات من الـ Intent بنفس المفاتيح
+        // njib el data nl intent
         String m = Cles.MATRICULE;
         Intent recu = getIntent();
         nom = recu.getStringExtra(Cles.nomVoyageur(m));
@@ -39,21 +39,21 @@ public class VerificationActivity extends AppCompatActivity {
         naissance = recu.getIntExtra(Cles.anneeNaissance(m), 0);
         destination = recu.getIntExtra(Cles.anneeDestination(m), 0);
 
-        // 4) حساب العمر الزمني = سنة الوجهة - سنة الميلاد
+        // calcul
         int ageTemporel = destination - naissance;
 
-        // 5) عرض الملخص
+        // el resume
         tvNom.setText("Nom : " + nom);
         tvAge.setText("Âge temporel : " + ageTemporel + " ans");
         tvMotif.setText("Motif : " + motif);
 
-        // 6) الشرط: سبب "Modification du passé" والفرق عدد أولي => تعطيل زر الموافقة
+        // raison logique
         if (motif.equals("Modification du passé") && estPremier(ageTemporel)) {
             btnApprouver.setEnabled(false);
             tvAlerte.setText("⚠ Paradoxe détecté : approbation impossible");
         }
 
-        // 7) زر الموافقة => الحكم true
+        // confirmation vqlidee
         btnApprouver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +61,7 @@ public class VerificationActivity extends AppCompatActivity {
             }
         });
 
-        // 8) زر الرفض => الحكم false
+        // non validee
         btnRefuser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +70,7 @@ public class VerificationActivity extends AppCompatActivity {
         });
     }
 
-    // 9) دالة تفتح النشاط الثالث وتمرر الحكم (boolean) واسم المسافر
+
     private void lancerVerdict(boolean approuve) {
         Intent intent = new Intent(VerificationActivity.this, ResultActivity.class);
         intent.putExtra(Cles.verdict(Cles.MATRICULE), approuve);
@@ -78,7 +78,6 @@ public class VerificationActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // 10) دالة اختبار العدد الأولي
     private boolean estPremier(int n) {
         if (n < 2) return false;
         for (int i = 2; i * i <= n; i++) {
